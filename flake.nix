@@ -15,8 +15,10 @@
     nixpkgs-nixos-stable.url = "github:nixos/nixpkgs/nixos-25.05";
 
     # home manager
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # nix darwin
     darwin.url = "github:lnl7/nix-darwin";
@@ -72,20 +74,10 @@
       inherit (lib) genAttrs;
 
       machines = [
-        {
-          name = "macbook-pro-m1";
-          user = "thomaslaich";
-          system = flake-utils.lib.system.aarch64-darwin;
-        }
-        {
-          name = "lenovo-desktop";
-          user = "thomaslaich";
-          system = flake-utils.lib.system.x86_64-linux;
-        }
         # My Galaxus device
         {
-          name = "DG-BYOH-8119";
-          user = "thomaslaich";
+          name = "DG-BYOH-9364";
+          user = "marc";
           system = flake-utils.lib.system.aarch64-darwin;
         }
       ];
@@ -108,6 +100,7 @@
             # inherit overlays;
             config = {
               allowUnfree = true;
+              allowUnsupportedSystem = true;
             };
           };
         }) systems

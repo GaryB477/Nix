@@ -30,14 +30,4 @@ in
     # needed for rancher
     "${homeDirectory}/.rd/bin"
   ];
-
-  home.sessionVariables = {
-    # needed for rancher
-    KRB5_CONFIG = "${homeDirectory}/.config/krb5.conf";
-  };
-
-  home.packages = with pkgs; [
-    krb5
-  ];
-
 }

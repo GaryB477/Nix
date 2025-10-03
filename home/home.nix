@@ -19,7 +19,7 @@ in
   imports = [
     # inputs.kauz.homeModules.default
     # inputs.nix-colorscheme.homeModules.colorscheme
-    inputs.agenix.homeManagerModules.default
+    #inputs.agenix.homeManagerModules.default
     inputs.stylix.homeModules.stylix
     ../stylix.nix
     {
@@ -46,7 +46,7 @@ in
   ];
 
   nixpkgs = {
-    # You can add overlays here
+    # You can ad––…π°øπßd overlays here
     overlays = [
       # Add overlays your own flake exports (from overlays and pkgs dir):
       # outputs.overlays.additions
@@ -64,9 +64,11 @@ in
       allowUnfree = true;
       # Workaround for https://github.com/nix-community/home-manager/issues/2942
       allowUnfreePredicate = _: true;
+      allowUnsupportedSystem = true;
     };
   };
 
+  
   home.stateVersion = "22.11";
 
   # Let Home Manager install and manage itself.
@@ -74,8 +76,8 @@ in
 
   programs.git = {
     enable = true;
-    userEmail = "thomaslaich@gmail.com";
-    userName = "Thomas Laich";
+    userEmail = "marc.roethlisberger@digitecgalaxus.ch";
+    userName = "Marc Röthlisberger";
     diff-so-fancy.enable = true;
   };
 
@@ -220,6 +222,8 @@ in
           ]
         ))
         k9s
+        docker
+        colima
         kubelogin
         kubernetes-helm
         lazydocker
@@ -233,12 +237,16 @@ in
       build-tools = with pkgs; [
         bazelisk # bazel wrapper (similar to NVM)
       ];
+      dotnet-tools = with pkgs; [
+        jetbrains-toolbox 
+      ];
       misc = with pkgs; [
         # _1password-cli # pw manager
         age # file encryption tool, used togehter with agenix - https://github.com/FiloSottile/age
         agenix-cli
         amber # search & replace - https://github.com/dalance/amber
         bat # better cat - https://github.com/sharkdp/bat
+        btop
         eza # better ls (bound to `l` and `la` in fish)
         fd
         fzf
@@ -269,6 +277,7 @@ in
       rust-language-support
       java-language-support
       misc-langauge-tools
+      dotnet-tools
 
       # GUI apps
       gui-apps
@@ -284,29 +293,6 @@ in
 
       # inputs.hcat.packages.${system}.default
     ];
-
-  # secrets from agenix
-  age.secrets = {
-    gcal-clientid = {
-      file = ../secrets/gcal-clientid.age;
-      path = "${homeDirectory}/.emacs.d/gcal-clientid";
-    };
-    gcal-clientsecret = {
-      file = ../secrets/gcal-clientsecret.age;
-      path = "${homeDirectory}/.emacs.d/gcal-clientsecret";
-    };
-    authinfo = {
-      file = ../secrets/authinfo.age;
-      path = "${homeDirectory}/.authinfo";
-    };
-    netrc = {
-      file = ../secrets/netrc.age;
-      path = "${homeDirectory}/.netrc";
-    };
-    claptrap = {
-      file = ../secrets/claptrap.age;
-    };
-  };
 
   home.sessionVariables = {
     DOTNET_ROOT = "${dotnet-packages}/share/dotnet";

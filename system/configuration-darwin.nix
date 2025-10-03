@@ -19,7 +19,7 @@
     inputs.agenix.darwinModules.default
     inputs.stylix.darwinModules.stylix
     ../stylix.nix
-    ./yabai/yabai.nix
+    # ./yabai/yabai.nix
     ./skhd/skhd.nix
   ];
 
@@ -32,6 +32,7 @@
     config = {
       # Allow unfree packages
       allowUnfree = true;
+      allowUnsupportedSystem = true;
     };
   };
 
@@ -40,9 +41,9 @@
   # Add ability to used TouchID for sudo authentication
   security.pam.services.sudo_local.touchIdAuth = true;
   system = {
-    primaryUser = "thomaslaich";
-    keyboard.enableKeyMapping = true;
-    keyboard.remapCapsLockToControl = true;
+    primaryUser = "marc";
+    keyboard.enableKeyMapping = false;
+    keyboard.remapCapsLockToEscape = true;
 
     defaults = {
       dock = {
@@ -67,6 +68,9 @@
         NSAutomaticPeriodSubstitutionEnabled = false;
         NSAutomaticQuoteSubstitutionEnabled = false;
         ApplePressAndHoldEnabled = false;
+        
+        # Enable Option key for special characters
+        AppleKeyboardUIMode = 3;
       };
     };
 
@@ -106,13 +110,12 @@
     casks = [
       "1password"
       "azure-data-studio"
-      "dropbox"
+      "docker"
       "firefox"
+      "plex"
       "ghostty"
       "google-chrome"
       "obsidian"
-      "spotify"
-      "studio-3t"
     ];
   };
 
@@ -122,9 +125,9 @@
   programs.zsh.enable = true;
   programs.fish.enable = true;
 
-  users.users.thomaslaich = {
-    name = "thomaslaich";
-    home = "/Users/thomaslaich";
+  users.users.marc= {
+    name = "marc";
+    home = "/Users/marc";
     # shell = pkgs.fish;
   };
 }

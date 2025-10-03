@@ -28,6 +28,7 @@ in
         {
           system = final.system;
           config.allowUnfree = true;
+          allowUnsupportedSystem = true;
         };
   };
 }

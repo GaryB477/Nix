@@ -5,10 +5,9 @@
     "banana-cake-pop"
     "microsoft-teams"
     "pritunl"
-    "rancher"
   ];
 
-  networking.hostName = "DG-BYOH-8119";
+  networking.hostName = "DG-BYOH-9364";
 
   ids.gids.nixbld = 350;
 

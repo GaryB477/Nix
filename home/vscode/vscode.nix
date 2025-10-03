@@ -71,10 +71,10 @@
           # editor basics
           "editor.tabSize" = 2;
           "editor.lineNumbers" = "relative";
-          "files.autoSave" = "off";
+          "files.autoSave" = "on";
           "editor.fontLigatures" = true;
           "editor.minimap.enabled" = false;
-          "workbench.editor.showTabs" = "none"; # no tabs (like my emacs and vim)
+          "workbench.editor.showTabs" = "multiple"; # no tabs (like my emacs and vim)
           "window.zoomLevel" = 1;
 
           # disable updates & synching
@@ -325,8 +325,6 @@
           "ilspy.defaultOutputLanguage" = "C# 11.0 / VS 2022.4";
           "files.eol" = "\n";
           "editor.formatOnSave" = false;
-          "claptrap.configEndpoint" = "${config.age.secrets.claptrap.path}";
-          "claptrap.modules.isomorph.projectPath" = "/Users/thomaslaich/repos/galaxus/isomorph";
           "python.analysis.typeCheckingMode" = "standard";
           "editor.fontSize" = pkgs.lib.mkForce 12.0;
           "chat.editor.fontSize" = pkgs.lib.mkForce 12.0;
@@ -336,8 +334,8 @@
           "workbench.sideBar.location" = "right";
 
           "github.copilot.enable" = {
-            "*" = false; # disable suggestions
-            "inlineSuggestions" = false; # disable inline-suggestions
+            "*" = true; # disable suggestions
+            "inlineSuggestions" = true; # disable inline-suggestions
           };
           "chat.agent.enabled" = true;
         };
