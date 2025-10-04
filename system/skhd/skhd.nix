@@ -28,57 +28,57 @@
       alt - 0  : yabai -m space --focus 10
 
       # delete focused space
-      alt - q : yabai -m space --destroy
+      #alt - q : yabai -m space --destroy
 
       # toggle window split type
-      alt - e : yabai -m window --toggle split
+      #alt - e : yabai -m window --toggle split
 
       # minimize window
-      alt - m : yabai -m window --minimize
+      #alt - m : yabai -m window --minimize
 
       # rotate tree
-      alt - r : yabai -m space --rotate 90
+      #alt - r : yabai -m space --rotate 90
 
       # mirror tree y-axis
-      alt - y : yabai -m space --mirror y-axis
+      #alt - y : yabai -m space --mirror y-axis
 
       # toggle desktop offset
-      alt - a : yabai -m space --toggle padding; yabai -m space --toggle gap
+      #alt - a : yabai -m space --toggle padding; yabai -m space --toggle gap
 
       # toggle window parent zoom
-      alt - d : yabai -m window --focus mouse && \
-                yabai -m window --toggle zoom-parent
+      #alt - d : yabai -m window --focus mouse && \
+      #          yabai -m window --toggle zoom-parent
 
       # float / unfloat window and center on screen
-      alt - t : yabai -m window --toggle float;\
-                yabai -m window --grid 4:4:1:1:2:2
+      #alt - t : yabai -m window --toggle float;\
+      #          yabai -m window --grid 4:4:1:1:2:2
 
       # toggle window fullscreen zoom
-      alt - f : yabai -m window --focus mouse && \
-                yabai -m window --toggle zoom-fullscreen
+      #alt - f : yabai -m window --focus mouse && \
+      #          yabai -m window --toggle zoom-fullscreen
 
       # toggle window native fullscreen
-      shift + alt - f : yabai -m window --toggle native-fullscreen
+      #shift + alt - f : yabai -m window --toggle native-fullscreen
 
       # increase gap in focused space
-      alt - g : yabai -m space --gap rel:10
+      #alt - g : yabai -m space --gap rel:10
 
       # decrease gap in focused space
       shift + alt - g : yabai -m space --gap rel:-10
 
       # create a new space and follow focus
-      alt - n : yabai -m space --create && \
-                        index="$(yabai -m query --displays --display | jq '.spaces[-1]')" && \
-                        yabai -m space --focus "$\{index\}"
+      #alt - n : yabai -m space --create && \
+      #                  index="$(yabai -m query --displays --display | jq '.spaces[-1]')" && \
+      #                  yabai -m space --focus "$\{index\}"
 
       # create a new space, move window and follow focus
-      shift + alt - n : yabai -m space --create && \
-                        index="$(yabai -m query --displays --display | jq '.spaces[-1]')" && \
-                        yabai -m window --space "$\{index\}" && \
-                        yabai -m space --focus "$\{index\}"
+      #shift + alt - n : yabai -m space --create && \
+      #                  index="$(yabai -m query --displays --display | jq '.spaces[-1]')" && \
+      #                  yabai -m window --space "$\{index\}" && \
+      #                  yabai -m space --focus "$\{index\}"
 
       # balance size of windows
-      shift + alt - 0 : yabai -m space --balance
+      #shift + alt - 0 : yabai -m space --balance
 
       # swap window
       shift + alt - h : yabai -m window --swap west

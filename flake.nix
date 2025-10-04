@@ -148,30 +148,6 @@
         treefmtEval.${pkgs.system}.config.build.wrapper
       );
 
-      nixosConfigurations = builtins.listToAttrs (
-        builtins.concatMap
-          (
-            mode:
-            builtins.map (machine: {
-              name = "${machine.name}-${mode}";
-              value = lib.nixosSystem {
-                inherit (machine) system;
-                specialArgs = {
-                  inherit inputs outputs mode;
-                };
-                modules = [
-                  ./system/configuration-nixos.nix
-                  ./system/configuration-${machine.name}.nix
-                ];
-              };
-            }) nixosMachines
-          )
-          [
-            "light"
-            "dark"
-          ]
-      );
-
       darwinConfigurations = builtins.listToAttrs (
         builtins.concatMap
           (
@@ -185,7 +161,7 @@
                 };
                 modules = [
                   ./system/configuration-darwin.nix
-                  ./system/configuration-${machine.name}.nix
+                  ./system/configuration.nix
                   inputs.nix-homebrew.darwinModules.nix-homebrew
                   {
                     nix-homebrew = {
@@ -228,7 +204,6 @@
                   }
                   ./home/home.nix
                   ./home/home-${if (isDarwin machine.system) then "darwin" else "nixos"}.nix
-                  ./home/home-${machine.name}.nix
                 ];
               };
             }) machines
@@ -304,30 +279,5 @@
           )
         )
       ) machinesBySystem;
-
-      # add all nixos and darwin configs to checks
-      checks =
-        (builtins.mapAttrs (
-          system: machines:
-          builtins.listToAttrs (
-            builtins.map (
-              machine:
-              let
-                toplevel =
-                  if (isDarwin machine.system) then
-                    darwinConfigurations.${machine.name}.config.system.build.toplevel
-                  else
-                    nixosConfigurations.${machine.name}.config.system.build.toplevel;
-              in
-              {
-                name = "toplevel-${machine.name}";
-                value = toplevel;
-              }
-            ) machines
-          )
-        ) machinesBySystem)
-        // eachSystem (system: {
-          formatting = treefmtEval.${system}.config.build.check self;
-        });
     };
 }
