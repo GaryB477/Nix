@@ -81,7 +81,7 @@
 
   # `home-manager` currently has issues adding them to `~/Applications`
   # Issue: https://github.com/nix-community/home-manager/issues/1341
-  environment.systemPackages = with pkgs; [ ];
+  environment.systemPackages = with pkgs; [ just ];
 
   environment.variables = {
     FISH_SHELL = "${pkgs.fish}/bin/fish";
@@ -113,6 +113,7 @@
       "docker"
       "firefox"
       "plex"
+      "gitkraken"
       "ghostty"
       "google-chrome"
       "obsidian"
