@@ -54,6 +54,8 @@
       url = "github:buntec/kauz";
       flake = false;
     };
+
+    dg-cli.url = "git+ssh://git@github.com/DigitecGalaxus/Dg.Cli?ref=main";
   };
 
   outputs =

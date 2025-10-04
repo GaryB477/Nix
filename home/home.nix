@@ -68,7 +68,6 @@ in
     };
   };
 
-  
   home.stateVersion = "22.11";
 
   # Let Home Manager install and manage itself.
@@ -89,12 +88,6 @@ in
   programs.zsh = {
     enable = true;
   };
-
-  # # private dropbox
-  # services.syncthing = {
-  #   enable = true;
-  #   extraOptions = [ ];
-  # };
 
   # for some reason fish enables this by default. This siginificantly slows down hm-switch when enabled.
   programs.man.generateCaches = false;
@@ -247,6 +240,7 @@ in
         amber # search & replace - https://github.com/dalance/amber
         bat # better cat - https://github.com/sharkdp/bat
         btop
+        discord
         eza # better ls (bound to `l` and `la` in fish)
         fd
         fzf
@@ -261,6 +255,7 @@ in
         tldr # simpler manpages
         vifm
         yazi # file manager
+        inputs.dg-cli.packages.${system}.default
       ];
     in
     pkgs.lib.lists.flatten [

@@ -345,7 +345,6 @@
           with pkgs.vscode-marketplace;
           [
             # General repo setups
-            mkhl.direnv
             editorconfig.editorconfig # needed?
             skellock.just
             # github.vscode-pull-request-github
