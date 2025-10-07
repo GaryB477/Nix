@@ -38,7 +38,7 @@ in
       };
     }
     ./emacs/emacs.nix
-    ./fish/fish.nix
+    ./zsh/zsh.nix
     ./ghostty/ghostty.nix
     ./neovim/neovim.nix
     ./tmux/tmux.nix
@@ -192,6 +192,7 @@ in
       git-tools = with pkgs; [
         gh # github CLI
         gitu # Magit clone for the command line
+        lazygit
       ];
       json-tools = with pkgs; [
         fx
@@ -252,6 +253,7 @@ in
         restic
         ripgrep # better grep
         scc # analyse codebases
+        stow
         tldr # simpler manpages
         vifm
         yazi # file manager
