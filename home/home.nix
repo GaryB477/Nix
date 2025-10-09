@@ -78,6 +78,14 @@ in
     userEmail = "marc.roethlisberger@digitecgalaxus.ch";
     userName = "Marc Röthlisberger";
     diff-so-fancy.enable = true;
+    extraConfig = {
+      url = {
+        # Instead of using https, use ssh for github
+        "git@github.com" = {
+          insteadOf = "https://github.com";
+        };
+      };
+    };
   };
 
   programs.direnv = {
