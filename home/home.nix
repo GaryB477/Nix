@@ -10,8 +10,8 @@ let
   dotnet-packages =
     with pkgs.dotnetCorePackages;
     combinePackages [
-      sdk_9_0-bin
-      sdk_8_0-bin
+      sdk_8_0
+      sdk_9_0
     ];
   inherit (config.home) homeDirectory;
 in
@@ -37,11 +37,11 @@ in
         };
       };
     }
-    ./emacs/emacs.nix
+    # ./emacs/emacs.nix
     ./zsh/zsh.nix
     ./ghostty/ghostty.nix
     ./neovim/neovim.nix
-    ./tmux/tmux.nix
+    # ./tmux/tmux.nix
     ./vscode/vscode.nix
   ];
 
@@ -75,23 +75,15 @@ in
 
   programs.git = {
     enable = true;
-    userEmail = "marc.roethlisberger@digitecgalaxus.ch";
-    userName = "Marc Röthlisberger";
+    settings.user.email = "marc.roethlisberger@digitecgalaxus.ch";
+    settings.user.name = "Marc Röthlisberger";
     diff-so-fancy.enable = true;
-    extraConfig = {
-      url = {
-        # Instead of using https, use ssh for github
-        "git@github.com" = {
-          insteadOf = "https://github.com";
-        };
-      };
-    };
   };
 
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-  };
+  # programs.direnv = {
+  #   enable = true;
+  #   nix-direnv.enable = true;
+  # };
 
   programs.zsh = {
     enable = true;
@@ -121,24 +113,25 @@ in
         dotnet-packages
         csharpier
         roslyn-ls # LSP for use in Neovim and Emacs
+        protobuf # Protocol Buffers support
       ];
 
-      python-with-packages = pkgs.python312.withPackages (
-        ps: with ps; [
-          jupyter
-          matplotlib
-          numpy
-          pandas
-          pyarrow
-          requests
-          scipy
-        ]
-      );
+      # python-with-packages = pkgs.python312.withPackages (
+      #   ps: with ps; [
+      #     # jupyter
+      #     # matplotlib
+      #     # numpy
+      #     # pandas
+      #     # pyarrow
+      #     # requests
+      #     # scipy
+      #   ]
+      # );
       python-language-support = with pkgs; [
         pixi # dep management with Conda
         # pyrefly # LSP from Meta
         pyright # LSP from Microsoft
-        python-with-packages
+        # python-with-packages
         ruff # formatter
         ty # LSP from Astral
         uv # dep management with PyPI
@@ -189,6 +182,7 @@ in
         jdk # compiler / JVM
       ];
       misc-langauge-tools = with pkgs; [
+        powershell
         taplo # TOML tools
         vale # markdown linter
         vscode-langservers-extracted # LSPs for various config formats
@@ -231,6 +225,7 @@ in
         lazydocker
         terraform
         hclfmt # formatter for HCL files (e.g., .tf)
+        ansible
       ];
       database-tools = with pkgs; [
         duckdb
@@ -244,6 +239,7 @@ in
       ];
       misc = with pkgs; [
         # _1password-cli # pw manager
+        adguardhome
         age # file encryption tool, used togehter with agenix - https://github.com/FiloSottile/age
         agenix-cli
         amber # search & replace - https://github.com/dalance/amber
@@ -261,6 +257,9 @@ in
         restic
         ripgrep # better grep
         scc # analyse codebases
+        shellcheck
+        tailscale
+        tree
         stow
         tldr # simpler manpages
         vifm

@@ -43,7 +43,26 @@
         # Enable Option key for special characters
         AppleKeyboardUIMode = 3;
       };
+      CustomUserPreferences = {
+        "com.apple.screencapture" = {
+          location = "~/Desktop";
+          type = "png";
+        };
+        "com.apple.finder" = {
+          ShowExternalHardDrivesOnDesktop = false;
+          ShowHardDrivesOnDesktop = true;
+          ShowMountedServersOnDesktop = true;
+          ShowRemovableMediaOnDesktop = true;
+          _FXSortFoldersFirst = true;
+          # When performing a search, search the current folder by default
+          FXDefaultSearchScope = "SCcf";
+        };
+      };
     };
+    # activationScripts.postUserActivation.text = ''
+    #   # Following line should allow us to avoid a logout/login cycle
+    #   /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+    # '';
 
     # Used for backwards compatibility, please read the changelog before changing.
     # $ darwin-rebuild changelog

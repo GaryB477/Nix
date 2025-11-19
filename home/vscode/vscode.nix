@@ -44,20 +44,34 @@
             "when" = "filesExplorerFocus && foldersViewVisible && explorerResourceIsFolder && !inputFocus";
           }
           {
-            "key" = "tab";
-            "command" = "-extension.vim_tab";
+            "key" = "ctrl+enter";
+            "command" = "code-runner.run";
           }
           {
-            "key" = "x";
-            "command" = "magit.discard-at-point";
-            "when" =
-              "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/";
+            "key" = "ctrl+p";
+            "command" = "selectPrevSuggestion";
+          }
+          {   
+            "key" = "ctrl+n"; 
+            "command" = "selectNextSuggestion";
+            "when" = "suggestWidgetVisible";
+          }
+          {   
+            "key" = "escape"; 
+            "command" = "hideSuggestWidget";
+            "when" = "suggestWidgetVisible";
           }
           {
-            "key" = "k";
-            "command" = "-magit.discard-at-point";
-            "when" =
-              "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/";
+            "key" = "shift shift";
+            "command" = "workbench.action.quickOpen";
+          }
+          {
+            "key" = "f2";
+            "command" = "editor.action.revealDefinition";
+          }
+          {
+            "key" = "ctrl+shift+alt+l";
+            "command" = "editor.action.formatDocument";
           }
         ];
         userSettings = {
@@ -71,7 +85,8 @@
           # editor basics
           "editor.tabSize" = 2;
           "editor.lineNumbers" = "relative";
-          "files.autoSave" = "on";
+          "files.autoSave" = "afterDelay";
+          "files.insertFinalNewline" = true;
           "editor.fontLigatures" = true;
           "editor.minimap.enabled" = false;
           "workbench.editor.showTabs" = "multiple"; # no tabs (like my emacs and vim)
@@ -112,194 +127,120 @@
               "after" = [ "<Esc>" ];
             }
           ];
+          "vim.visualModeKeyBindings" = [
+            {
+                "before" = [
+                    "<Leader>"
+                    "c"
+                ];
+                "commands" = [
+                    "editor.action.commentLine"
+                ];
+            }
+          ];
+
           "vim.normalModeKeyBindingsNonRecursive" = [
             {
               "before" = [
-                "<leader>"
-                "t"
-                "v"
-              ];
-              "commands" = [ "workbench.action.terminal.toggleTerminal" ];
-            }
-            {
-              "before" = [
-                "<leader>"
-                "f"
-                "f"
-              ];
-              "commands" = [ "workbench.action.quickOpen" ];
-            }
-            {
-              "before" = [
-                "<leader>"
-                "f"
-                "g"
-              ];
-              "commands" = [ "workbench.action.findInFiles" ];
-            }
-            {
-              "before" = [
-                "<leader>"
-                "/"
-              ];
-              "commands" = [ "actions.find" ];
-            }
-            {
-              "before" = [
-                "<leader>"
-                "g"
-                "g"
-              ];
-              "commands" = [ "magit.status" ];
-            }
-            {
-              "before" = [
-                "<leader>"
-                "n"
-              ];
-              "commands" = [ "workbench.view.explorer" ];
-            }
-            {
-              "before" = [
-                "<leader>"
-                "w"
-                "h"
-              ];
-              "commands" = [ "workbench.action.navigateLeft" ];
-            }
-            {
-              "before" = [
-                "<leader>"
-                "w"
-                "j"
-              ];
-              "commands" = [ "workbench.action.navigateDown" ];
-            }
-            {
-              "before" = [
-                "<leader>"
-                "w"
-                "k"
-              ];
-              "commands" = [ "workbench.action.navigateUp" ];
-            }
-            {
-              "before" = [
-                "<leader>"
-                "w"
-                "l"
-              ];
-              "commands" = [ "workbench.action.navigateRight" ];
-            }
-            {
-              "before" = [
-                "<leader>"
-                "w"
-                "c"
-              ];
-              "commands" = [ "workbench.action.closeEditorsAndGroup" ];
-            }
-            {
-              "before" = [
-                "<leader>"
-                "b"
-                "k"
-              ];
-              "commands" = [ "workbench.action.closeActiveEditor" ];
-            }
-            {
-              "before" = [
-                "<leader>"
-                "w"
-                "o"
-              ];
-              "commands" = [ "workbench.action.closeOtherEditors" ];
-            }
-            {
-              "before" = [
-                "<leader>"
-                "w"
-                "s"
-              ];
-              "commands" = [ "workbench.action.splitEditorOrthogonal" ];
-            }
-            {
-              "before" = [
-                "<leader>"
-                "w"
-                "v"
-              ];
-              "commands" = [ "workbench.action.splitEditor" ];
-            }
-            {
-              "before" = [
-                "<leader>"
-                "w"
-                "o"
-              ];
-              "commands" = [ "workbench.action.closeEditorsInOtherGroups" ];
-            }
-            {
-              "before" = [
-                "<leader>"
-                "b"
-                "b"
-              ];
-              "commands" = [ "workbench.files.action.focusOpenEditorsView" ];
-            }
-            {
-              "before" = [
-                "<leader>"
-                "."
-              ];
-              "commands" = [ "extension.dired.open" ];
-            }
-            {
-              "before" = [
-                ","
-                "a"
+                  "<Leader>"
+                  "c"
               ];
               "commands" = [
-                "editor.action.quickFix"
-                "acceptSelectedCodeAction"
-                "problems.action.showQuickFixes"
+                  "editor.action.commentLine"
               ];
             }
             {
               "before" = [
-                ","
-                "f"
+                  "<Leader>"
+                  "r"
               ];
-              "commands" = [ "editor.action.formatDocument" ];
+              "commands" = [
+                  "editor.action.rename"
+              ];
             }
             {
               "before" = [
-                ","
-                "m"
+                  "<Leader>"
+                  "j"
               ];
-              "commands" = [ "editor.action.rename" ];
+              "commands" = [
+                  "workbench.action.navigateBack"
+              ];
             }
             {
               "before" = [
-                "g"
-                "I"
+                  "<Leader>"
+                  "k"
               ];
-              "commands" = [ "editor.action.goToImplementation" ];
+              "commands" = [
+                  "workbench.action.navigateForward"
+              ];
             }
             {
               "before" = [
-                "g"
-                "r"
+                  "<Leader>"
+                  "l"
               ];
-              "commands" = [ "editor.action.goToReferences" ];
+              "commands" = [
+                  "workbench.action.navigateEditorGroups"
+              ];
             }
             {
-              "before" = [ "<C-n>" ];
-              "commands" = [ "=nohl" ];
+              "before" = [
+                  "<Leader>"
+                  "f"
+              ];
+              "commands" = [
+                  "editor.foldRecursively"
+              ];
             }
             {
-              "before" = [ "K" ];
-              "commands" = [ "editor.action.showHover" ];
+              "before" = [
+                  "<Leader>"
+                  "f"
+                  "f"
+              ];
+              "commands" = [
+                  "editor.foldAll"
+              ];
+            }
+            {
+              "before" = [
+                  "<Leader>"
+                  "o"
+              ];
+              "commands" = [
+                  "editor.unfoldRecursively"
+              ];
+            }
+            {
+              "before" = [
+                  "<C-u>"
+              ];
+              "after" = [
+                  "1"
+                  "0"
+                  "k"
+              ];
+            }
+            {
+              "before" = [
+                  "<C-d>"
+              ];
+              "after" = [
+                  "1"
+                  "0"
+                  "j"
+              ];
+            }
+            {
+              "before" = [
+                  "<Leader>"
+                  "w"
+              ];
+              "commands" = [
+                  "editor.action.marker.next"
+              ];
             }
           ];
           "vim.leader" = "<space>";
@@ -346,45 +287,15 @@
           [
             # General repo setups
             editorconfig.editorconfig # needed?
-            skellock.just
-            # github.vscode-pull-request-github
-
-            # Networking
-            postman.postman-for-vscode
-            humao.rest-client
+            streetsidesoftware.code-spell-checker
+            marcovr.actions-shell-scripts
 
             # Make VSCode more like vim and emacs
             vscodevim.vim
-            kahole.magit
-            rrudi.vscode-dired
-
-            # JS/TS
-            ms-vscode.vscode-typescript-next
-            svelte.svelte-vscode
-            dbaeumer.vscode-eslint
-            unifiedjs.vscode-mdx
-            esbenp.prettier-vscode
 
             # Python
             ms-python.python
             ms-python.debugpy
-            # ms-python.vscode-python-envs
-            # meta.pyrefly # typechecker/LSP by Meta
-            # astral-sh.ty # typechecker/LSP by Astral
-            charliermarsh.ruff # linter by Astral
-
-            # Go
-            golang.go
-
-            # Rust
-            rust-lang.rust-analyzer
-
-            # .NET
-            ms-dotnettools.dotnet-interactive-vscode # polyglot notebooks
-            # ms-dotnettools.vscode-dotnet-runtime # .NET install tool
-            ionide.ionide-fsharp
-            csharpier.csharpier-vscode # formatter
-            tintoy.msbuild-project-tools
 
             # Lua
             sumneko.lua
@@ -393,14 +304,8 @@
             jnoortheen.nix-ide
 
             # Docker / DevOps / Cloud
-            ms-azuretools.vscode-docker
-            ms-kubernetes-tools.vscode-kubernetes-tools
-            hashicorp.hcl
             github.vscode-github-actions
             ashishalex.dataform-lsp-vscode
-            ms-azuretools.vscode-azureresourcegroups
-            ms-azuretools.vscode-azurefunctions
-            hashicorp.terraform
 
             # XML, YAML, TOML
             redhat.vscode-yaml
@@ -408,47 +313,16 @@
             redhat.vscode-xml
             bluebrown.yamlfmt
 
-            # GraphQL
-            graphql.vscode-graphql-syntax
-            graphql.vscode-graphql
-            meta.relay
-
-            # Haskell
-            haskell.haskell
-            justusadam.language-haskell
-
-            # Avro
-            streetsidesoftware.avro
-
-            # Powershell
-            ms-vscode.powershell
-
             # Shell
             timonwong.shellcheck
-
-            # Galaxus
-            # dg-infinity.claptrap
-
-            # DuckDB, parquet
-            lucien-martijn.parquet-visualizer
           ]
           ++ (with pkgs.vscode-extensions; [
             github.vscode-pull-request-github
 
-            ms-dotnettools.csharp
-            ms-dotnettools.csdevkit
-
-            # ms-dotnettools.dotnet-interactive-vscode # polyglot notebooks
-            ms-dotnettools.vscode-dotnet-runtime # .NET install tool
-
             github.copilot
             github.copilot-chat
-
-            ms-python.vscode-pylance
-            ms-toolsai.jupyter
-
-            eamodio.gitlens
-          ]);
+          ]
+        );
       };
     };
   };

@@ -13,6 +13,8 @@
         cp = "rsync -ah --progress";
         gs = "git status";
         gc = "git clone ";
+        prc = "gh pr create -d --fill && gh pr view --web";
+        prv = "gh pr view --web";
       };
       oh-my-zsh = { # "ohMyZsh" without Home Manager
         enable = true;

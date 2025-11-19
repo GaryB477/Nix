@@ -2,9 +2,7 @@
 
 Configuration for my personal machines (both macOS and NixOS).
 
-Credits to [buntec/nix-config](https://github.com/buntec/nix-config); my config started as a clone of that repo.
-
-I also highly recommend to checkout [Misterio77/nix-starter-configs](https://github.com/Misterio77/nix-starter-configs) to get inspiration for your flake config.
+Credits to [thomaslaich/nix-config](https://github.com/thomaslaich/nix-config); This setup is heavily inspired by his configuration :)
 
 ## Fresh NixOS install
 
