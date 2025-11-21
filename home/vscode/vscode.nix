@@ -320,9 +320,27 @@
             github.vscode-pull-request-github
 
             github.copilot
-            github.copilot-chat
-          ]
-        );
+            # github.copilot-chat
+          ])
+          ++ [
+          # Manually pin Copilot Chat to a specific version
+          (pkgs.vscode-utils.extensionFromVscodeMarketplace {
+            name = "copilot-chat";
+            publisher = "GitHub";
+            # Example version: September 2024. 
+            # Check the VS Code Marketplace "Version History" tab for other valid strings.
+            version = "0.33.2"; 
+            
+            # STEP 1: Use fakeSha256 first
+            
+            sha256 = "sha256-8TgwChU+849zSd+/j3pVR/0U96QJV3jLbyf8XhTVnys="; 
+            # sha256 = pkgs.lib.fakeSha256; 
+            
+            # STEP 2: After the build fails, copy the generic hash from the error 
+            # and paste it here, replacing the fake one.
+            # sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; 
+          })
+        ];
       };
     };
   };

@@ -10,6 +10,7 @@
 
     # nixpkgs channels
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-25.05-darwin";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-nixos.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-nixos-stable.url = "github:nixos/nixpkgs/nixos-25.05";
 
@@ -57,6 +58,7 @@
       darwin,
       nixpkgs,
       nixpkgs-nixos,
+      nixpkgs-unstable,
       home-manager,
       devenv,
       flake-utils,
@@ -97,7 +99,23 @@
               allowUnfree = true;
               allowUnsupportedSystem = true;
             };
-          };
+            overlays = [
+              # 1. Create the 'unstable' package set (Generic)
+              (final: prev: {
+                unstable = import nixpkgs-unstable {
+                  inherit system;
+                  config.allowUnfree = true;
+                };
+              })
+              # 2. Override specific packages to use the unstable version
+              (final: prev: {
+                vscode = final.unstable.vscode;
+                # Add other applications here easily, e.g.:
+                # neovim = final.unstable.neovim;
+                # ripgrep = final.unstable.ripgrep;
+              })
+            ];
+           };
         }) systems
       );
 
