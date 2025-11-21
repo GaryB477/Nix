@@ -239,6 +239,7 @@ in
       ];
       misc = with pkgs; [
         # _1password-cli # pw manager
+        aldente # macOS battery manager
         adguardhome
         age # file encryption tool, used togehter with agenix - https://github.com/FiloSottile/age
         # agenix-cli
