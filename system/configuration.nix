@@ -11,7 +11,7 @@
   '';
 
   imports = [
-    inputs.agenix.darwinModules.default
+    # inputs.agenix.darwinModules.default
     inputs.stylix.darwinModules.stylix
     ../stylix.nix
     # ./yabai/yabai.nix

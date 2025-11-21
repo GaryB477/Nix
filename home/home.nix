@@ -53,10 +53,10 @@ in
       outputs.overlays.modifications
       outputs.overlays.stable-packages
 
-      inputs.neorg-overlay.overlays.default
+      # inputs.neorg-overlay.overlays.default
       inputs.vimplugins-overlay.overlays.default
       inputs.nix-vscode-extensions.overlays.default
-      inputs.emacs-overlay.overlays.default
+      # inputs.emacs-overlay.overlays.default
     ];
     # Configure your nixpkgs instance
     config = {
@@ -75,8 +75,8 @@ in
 
   programs.git = {
     enable = true;
-    settings.user.email = "marc.roethlisberger@digitecgalaxus.ch";
-    settings.user.name = "Marc Röthlisberger";
+    userEmail = "marc.roethlisberger@digitecgalaxus.ch";
+    userName = "Marc Röthlisberger";
     diff-so-fancy.enable = true;
   };
 
@@ -241,7 +241,7 @@ in
         # _1password-cli # pw manager
         adguardhome
         age # file encryption tool, used togehter with agenix - https://github.com/FiloSottile/age
-        agenix-cli
+        # agenix-cli
         amber # search & replace - https://github.com/dalance/amber
         bat # better cat - https://github.com/sharkdp/bat
         btop
@@ -261,9 +261,10 @@ in
         tailscale
         tree
         stow
-        tldr # simpler manpages
-        vifm
-        yazi # file manager
+        # tldr # simpler manpages
+        # vifm
+        # yazi # file manager
+        # yubioath-flutter
         inputs.dg-cli.packages.${system}.default
       ];
     in
