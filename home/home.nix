@@ -65,6 +65,10 @@ in
       # Workaround for https://github.com/nix-community/home-manager/issues/2942
       allowUnfreePredicate = _: true;
       allowUnsupportedSystem = true;
+      permittedInsecurePackages = [
+        "python3.12-ecdsa-0.19.1"
+        "esphome-2024.6.0"
+      ];
     };
   };
 
@@ -247,6 +251,7 @@ in
         bat # better cat - https://github.com/sharkdp/bat
         btop
         discord
+        esphome
         eza # better ls (bound to `l` and `la` in fish)
         fd
         fzf

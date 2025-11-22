@@ -94,20 +94,13 @@
           name = system;
           value = import (if (isDarwin system) then nixpkgs else nixpkgs-nixos) {
             inherit system;
-            # inherit overlays;
-            config = {
-              allowUnfree = true;
-              allowUnsupportedSystem = true;
-            };
             overlays = [
-              # 1. Create the 'unstable' package set (Generic)
               (final: prev: {
                 unstable = import nixpkgs-unstable {
                   inherit system;
                   config.allowUnfree = true;
                 };
               })
-              # 2. Override specific packages to use the unstable version
               (final: prev: {
                 vscode = final.unstable.vscode;
                 # Add other applications here easily, e.g.:
