@@ -12,6 +12,7 @@ let
     combinePackages [
       sdk_8_0
       sdk_9_0
+      sdk_10_0
     ];
   inherit (config.home) homeDirectory;
 in
@@ -120,7 +121,7 @@ in
         protobuf # Protocol Buffers support
       ];
 
-      # python-with-packages = pkgs.python312.withPackages (
+      # python-with-packages = pkgs.python313.withPackages (
       #   ps: with ps; [
       #     # jupyter
       #     # matplotlib
@@ -132,6 +133,7 @@ in
       #   ]
       # );
       python-language-support = with pkgs; [
+        (python313.withPackages (ps: [ ps.pip ]))
         pixi # dep management with Conda
         # pyrefly # LSP from Meta
         pyright # LSP from Microsoft
@@ -250,6 +252,7 @@ in
         amber # search & replace - https://github.com/dalance/amber
         bat # better cat - https://github.com/sharkdp/bat
         btop
+        claude-code
         discord
         esphome
         eza # better ls (bound to `l` and `la` in fish)
@@ -267,11 +270,13 @@ in
         tailscale
         tree
         stow
+        wireshark
         # tldr # simpler manpages
         # vifm
         # yazi # file manager
         # yubioath-flutter
         inputs.dg-cli.packages.${system}.default
+        yabai
       ];
     in
     pkgs.lib.lists.flatten [
