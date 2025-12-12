@@ -80,9 +80,14 @@ in
 
   programs.git = {
     enable = true;
-    userEmail = "marc.roethlisberger@digitecgalaxus.ch";
-    userName = "Marc Röthlisberger";
-    diff-so-fancy.enable = true;
+    settings.user = {
+      name = "Marc Röthlisberger";
+      email = "marc.roethlisberger@digitecgalaxus.ch";
+    };
+  };
+  programs.diff-so-fancy = {
+    enable = true;
+    enableGitIntegration = true;
   };
 
   # programs.direnv = {
@@ -226,6 +231,7 @@ in
         k9s
         docker
         colima
+        podman
         kubelogin
         kubernetes-helm
         lazydocker
@@ -254,7 +260,7 @@ in
         btop
         claude-code
         discord
-        esphome
+        # esphome
         eza # better ls (bound to `l` and `la` in fish)
         fd
         fzf
