@@ -82,6 +82,7 @@
       "docker"
       "firefox"
       "plex"
+      "krisp"
       "gitkraken"
       "ghostty"
       "google-chrome"
