@@ -9,19 +9,19 @@
     devenv.inputs.nixpkgs.follows = "nixpkgs";
 
     # nixpkgs channels
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-25.05-darwin";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-25.11-darwin";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-nixos.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-nixos-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs-nixos-stable.url = "github:nixos/nixpkgs/nixos-25.11";
 
     # home manager
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # nix darwin
-    darwin.url = "github:lnl7/nix-darwin/nix-darwin-25.05";
+    darwin.url = "github:lnl7/nix-darwin/nix-darwin-25.11";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
     # overlays
@@ -42,7 +42,7 @@
     };
 
     # theming
-    stylix.url = "github:danth/stylix/release-25.05";
+    stylix.url = "github:danth/stylix/release-25.11";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
     kauz = {
       url = "github:buntec/kauz";
