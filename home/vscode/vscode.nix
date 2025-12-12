@@ -293,6 +293,9 @@
             # Make VSCode more like vim and emacs
             vscodevim.vim
 
+            # AI save the day!
+            anthropic.claude-code
+
             # Python
             ms-python.python
             ms-python.debugpy
