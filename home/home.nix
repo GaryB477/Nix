@@ -68,7 +68,6 @@ in
       allowUnsupportedSystem = true;
       permittedInsecurePackages = [
         "python3.12-ecdsa-0.19.1"
-        "esphome-2024.6.0"
       ];
     };
   };
@@ -249,7 +248,8 @@ in
       dotnet-tools = with pkgs; [
         jetbrains-toolbox 
       ];
-      misc = with pkgs; [
+      misc =
+      with pkgs; [
         # _1password-cli # pw manager
         aldente # macOS battery manager
         adguardhome
@@ -260,7 +260,6 @@ in
         btop
         claude-code
         discord
-        # esphome
         eza # better ls (bound to `l` and `la` in fish)
         fd
         fzf
@@ -284,6 +283,9 @@ in
         inputs.dg-cli.packages.${system}.default
         yabai
       ];
+      custom-packages = with pkgs; [
+          (pkgs.callPackage ../packages/esphome/package.nix { })
+        ];
     in
     pkgs.lib.lists.flatten [
       # language support
