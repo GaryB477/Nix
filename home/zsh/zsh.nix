@@ -21,7 +21,16 @@
         plugins = [ "git" ];
         theme = "robbyrussell";
       };
+      # initExtra = ''
+      #   eval "$(direnv hook zsh)"
+      # '';
       history.size = 10000;
+    };
+
+    programs.direnv = {
+      enable = true;
+      enableZshIntegration = true;
+      nix-direnv.enable = true;  # Optional but recommended for Nix projects
     };
 
     # Enable fzf with zsh integration

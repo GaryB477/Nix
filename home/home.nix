@@ -260,6 +260,7 @@ in
         btop
         claude-code
         discord
+        direnv
         eza # better ls (bound to `l` and `la` in fish)
         fd
         fzf
@@ -268,11 +269,13 @@ in
         libnotify
         ncdu
         openssl
+        postman
         restic
         ripgrep # better grep
         scc # analyse codebases
         shellcheck
         tailscale
+        trivy
         tree
         stow
         wireshark
@@ -314,6 +317,7 @@ in
       database-tools
       build-tools
       misc
+      custom-packages
 
       # inputs.hcat.packages.${system}.default
     ];

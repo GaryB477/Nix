@@ -49,7 +49,7 @@
       flake = false;
     };
 
-    dg-cli.url = "git+ssh://git@github.com/DigitecGalaxus/Dg.Cli?ref=refs/tags/2.8.5";
+    dg-cli.url = "git+ssh://git@github.com/DigitecGalaxus/Dg.Cli?ref=refs/tags/2.7.0";
   };
 
   outputs =
