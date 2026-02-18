@@ -69,6 +69,73 @@
     nerd-fonts.ubuntu
   ];
   services.tailscale.enable = true;
+
+  # Auto-upgrade: runs as root, handles flake update + darwin-rebuild
+  launchd.daemons.nix-auto-upgrade = {
+    serviceConfig = {
+      ProgramArguments = [
+        "/bin/sh"
+        "-c"
+        ''
+          # Only run on AC power
+          pmset -g ps | grep -q 'AC Power' || exit 0
+          cd /Users/marc/git/private/Nix
+          touch /tmp/nix-upgrade-running
+          /run/current-system/sw/bin/nix flake update && /run/current-system/sw/bin/darwin-rebuild switch --flake .#DG-BYOH-9364-dark
+          echo $? > /tmp/nix-upgrade-exit-code
+          rm -f /tmp/nix-upgrade-running
+          touch /tmp/nix-upgrade-done
+        ''
+      ];
+      StartCalendarInterval = [ { Hour = 3; Minute = 0; } ];
+      StandardOutPath = "/var/log/nix-auto-upgrade.log";
+      StandardErrorPath = "/var/log/nix-auto-upgrade.err.log";
+      RunAtLoad = false;
+    };
+  };
+
+  # Auto-upgrade: runs as marc, waits for daemon and runs home-manager + sends notification
+  launchd.agents.nix-auto-upgrade-hm = {
+    serviceConfig = {
+      ProgramArguments = [
+        "/bin/sh"
+        "-c"
+        ''
+          # Wait for daemon to finish (max 2h)
+          waited=0
+          while [ -f /tmp/nix-upgrade-running ] && [ $waited -lt 7200 ]; do
+            sleep 10
+            waited=$((waited + 10))
+          done
+
+          [ -f /tmp/nix-upgrade-done ] || exit 0
+          rm -f /tmp/nix-upgrade-done
+
+          exit_code=$(cat /tmp/nix-upgrade-exit-code 2>/dev/null || echo "1")
+          rm -f /tmp/nix-upgrade-exit-code
+
+          if [ "$exit_code" != "0" ]; then
+            osascript -e 'display notification "darwin-rebuild fehlgschlage. Check /var/log/nix-auto-upgrade.log" with title "Nix Auto-Upgrade" subtitle "Fehler"'
+            exit 1
+          fi
+
+          cd /Users/marc/git/private/Nix
+          /Users/marc/.nix-profile/bin/home-manager switch --flake .#DG-BYOH-9364-dark
+          hm_exit=$?
+
+          if [ $hm_exit -eq 0 ]; then
+            osascript -e 'display notification "System und Home Manager erfolgreich upgraded" with title "Nix Auto-Upgrade" subtitle "Erfolg"'
+          else
+            osascript -e 'display notification "home-manager fehlgschlage. Check ~/.local/log/nix-hm-upgrade.log" with title "Nix Auto-Upgrade" subtitle "Fehler"'
+          fi
+        ''
+      ];
+      StartCalendarInterval = [ { Hour = 3; Minute = 10; } ];
+      StandardOutPath = "/Users/marc/.local/log/nix-hm-upgrade.log";
+      StandardErrorPath = "/Users/marc/.local/log/nix-hm-upgrade.err.log";
+      RunAtLoad = false;
+    };
+  };
   # some GUI apps need to be installed with homebrew (but not all!)
   homebrew = {
     enable = true;
