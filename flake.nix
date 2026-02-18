@@ -9,10 +9,10 @@
     devenv.inputs.nixpkgs.follows = "nixpkgs";
 
     # nixpkgs channels
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-25.11-darwin";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixpkgs-nixos.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-nixos-stable.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs.url = "https://github.com/nixos/nixpkgs/archive/nixpkgs-25.11-darwin.tar.gz";
+    nixpkgs-unstable.url = "https://github.com/nixos/nixpkgs/archive/nixpkgs-unstable.tar.gz";
+    nixpkgs-nixos.url = "https://github.com/nixos/nixpkgs/archive/nixos-unstable.tar.gz";
+    nixpkgs-nixos-stable.url = "https://github.com/nixos/nixpkgs/archive/nixos-25.11.tar.gz";
 
     # home manager
     home-manager = {

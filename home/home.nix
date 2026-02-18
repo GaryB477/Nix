@@ -219,6 +219,7 @@ in
       ];
       cloud-tools = with pkgs; [
         azure-cli
+        azure-storage-azcopy
         (google-cloud-sdk.withExtraComponents (
           with google-cloud-sdk.components;
           [
@@ -251,8 +252,6 @@ in
       misc =
       with pkgs; [
         # _1password-cli # pw manager
-        aldente # macOS battery manager
-        adguardhome
         age # file encryption tool, used togehter with agenix - https://github.com/FiloSottile/age
         # agenix-cli
         amber # search & replace - https://github.com/dalance/amber

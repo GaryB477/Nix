@@ -21,9 +21,10 @@
         plugins = [ "git" ];
         theme = "robbyrussell";
       };
-      # initExtra = ''
-      #   eval "$(direnv hook zsh)"
-      # '';
+      initExtra = ''
+        # Disable ctrl+h keybinding
+        bindkey -r "^H"
+      '';
       history.size = 10000;
     };
 

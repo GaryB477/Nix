@@ -7,11 +7,6 @@
 }:
 {
   networking.hostName = "DG-BYOH-9364";
-  networking.dns = [
-    "127.0.0.1"
-    # "1.1.1.1" # Cloudflare (Fallback)
-    # "9.9.9.9" # Quad9 (Fallback)
-  ];
   networking.knownNetworkServices = [
     "Wi-Fi"
     # "USB 10/100/1000 LAN"

@@ -310,11 +310,12 @@
             github.vscode-github-actions
             ashishalex.dataform-lsp-vscode
 
-            # XML, YAML, TOML
+            # XML, YAML, TOML, CSV
             redhat.vscode-yaml
             tamasfe.even-better-toml
             redhat.vscode-xml
             bluebrown.yamlfmt
+            janisdd.vscode-edit-csv
 
             # Shell
             timonwong.shellcheck

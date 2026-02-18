@@ -8,6 +8,7 @@
 {
   nix.extraOptions = ''
     experimental-features = nix-command flakes
+    !include /etc/nix/access-tokens.conf
   '';
 
   imports = [
@@ -76,9 +77,13 @@
       cleanup = "zap";
     };
     taps = builtins.attrNames config.nix-homebrew.taps;
+    brews = [
+      "openapi-generator"
+    ];
     casks = [
       "1password"
       "balenaetcher"
+      "eurkey" # keyboard layout
       "docker"
       "firefox"
       "plex"
