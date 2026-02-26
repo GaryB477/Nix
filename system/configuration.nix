@@ -6,6 +6,7 @@
   ...
 }:
 {
+  nix.package = pkgs.unstable.nix;
   nix.extraOptions = ''
     experimental-features = nix-command flakes
     !include /etc/nix/access-tokens.conf
@@ -22,6 +23,7 @@
   nixpkgs = {
     overlays = [
       outputs.overlays.modifications
+      outputs.overlays.unstable-packages
       outputs.overlays.stable-packages
     ];
     # Configure your nixpkgs instance
@@ -152,12 +154,10 @@
       "balenaetcher"
       "eurkey" # keyboard layout
       "docker"
-      "firefox"
       "plex"
       "krisp"
       "gitkraken"
       "ghostty"
-      "google-chrome"
       "hammerspoon"
       "obsidian"
       "microsoft-teams"

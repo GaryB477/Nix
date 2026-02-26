@@ -200,6 +200,7 @@ in
       ];
       gui-apps = with pkgs; [
         # ghostty # currently broken in nixpkgs
+        pkgs.unstable.google-chrome
       ];
       git-tools = with pkgs; [
         gh # github CLI
@@ -257,7 +258,7 @@ in
         amber # search & replace - https://github.com/dalance/amber
         bat # better cat - https://github.com/sharkdp/bat
         btop
-        claude-code
+        pkgs.unstable.claude-code
         discord
         direnv
         eza # better ls (bound to `l` and `la` in fish)
