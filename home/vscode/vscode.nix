@@ -13,7 +13,6 @@
         jnoortheen.nix-ide
 
         # git
-        eamodio.gitlens
         waderyan.gitblame
 
         # shell
@@ -24,7 +23,6 @@
         ms-python.python
         ms-python.vscode-pylance
         ms-python.debugpy
-        charliermarsh.ruff
 
         # terraform
         hashicorp.terraform
