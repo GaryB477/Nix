@@ -77,7 +77,6 @@
       ];
       isDarwin = system: (builtins.match ".*darwin" system) != null;
       darwinMachines = builtins.filter (machine: isDarwin machine.system) machines;
-      nixosMachines = builtins.filter (machine: !isDarwin machine.system) machines;
       machinesBySystem = builtins.groupBy (machine: machine.system) machines;
       systems = builtins.attrNames machinesBySystem;
 

@@ -24,7 +24,6 @@
     overlays = [
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
-      outputs.overlays.stable-packages
     ];
     # Configure your nixpkgs instance
     config = {

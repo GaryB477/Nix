@@ -44,12 +44,11 @@ in
   ];
 
   nixpkgs = {
-    # You can ad––…π°øπßd overlays here
+    # You can add overlays here
     overlays = [
       # Add overlays your own flake exports (from overlays and pkgs dir):
       # outputs.overlays.additions
       outputs.overlays.modifications
-      outputs.overlays.stable-packages
 
       # inputs.neorg-overlay.overlays.default
       inputs.vimplugins-overlay.overlays.default
@@ -97,7 +96,6 @@ in
     enable = true;
   };
 
-  # for some reason fish enables this by default. This siginificantly slows down hm-switch when enabled.
   programs.man.generateCaches = false;
 
   programs.htop.enable = true;
@@ -190,7 +188,7 @@ in
       java-language-support = with pkgs; [
         jdk # compiler / JVM
       ];
-      misc-langauge-tools = with pkgs; [
+      misc-language-tools = with pkgs; [
         powershell
         taplo # TOML tools
         vale # markdown linter
@@ -250,8 +248,7 @@ in
       dotnet-tools = with pkgs; [
         jetbrains-toolbox 
       ];
-      misc =
-      with pkgs; [
+      misc = with pkgs; [
         # _1password-cli # pw manager
         age # file encryption tool, used togehter with agenix - https://github.com/FiloSottile/age
         # agenix-cli
@@ -267,7 +264,6 @@ in
         httpie
         killall
         libnotify
-        nixos-rebuild
         ncdu
         openssl
         postman
@@ -305,7 +301,7 @@ in
       bash-language-support
       rust-language-support
       java-language-support
-      misc-langauge-tools
+      misc-language-tools
       dotnet-tools
 
       # GUI apps

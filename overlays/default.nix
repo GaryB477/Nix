@@ -3,10 +3,6 @@
   inputs,
   ...
 }:
-
-let
-  isDarwin = system: (builtins.match ".*darwin" system) != null;
-in
 {
 
   # # This one brings our custom packages from the 'pkgs' directory
@@ -26,16 +22,5 @@ in
       system = final.system;
       config.allowUnfree = true;
     };
-  };
-
-  stable-packages = final: _prev: {
-    stable =
-      import
-        (if (isDarwin final.system) then inputs.nixpkgs-darwin-stable else inputs.nixpkgs-nixos-stable)
-        {
-          system = final.system;
-          config.allowUnfree = true;
-          allowUnsupportedSystem = true;
-        };
   };
 }
