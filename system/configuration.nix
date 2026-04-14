@@ -9,6 +9,13 @@
   nix.package = pkgs.unstable.nix;
   nix.extraOptions = ''
     experimental-features = nix-command flakes
+    # GitHub API token to avoid rate limiting when fetching flake inputs.
+    # The file is NOT managed by Nix — create it manually (once, as root):
+    #
+    #   sudo sh -c 'echo "access-tokens = github.com=ghp_YOUR_TOKEN" > /etc/nix/access-tokens.conf'
+    #   sudo chmod 600 /etc/nix/access-tokens.conf
+    #
+    # A fine-grained token with no permissions (read-only public repos) is enough.
     !include /etc/nix/access-tokens.conf
   '';
 
