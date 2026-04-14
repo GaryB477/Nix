@@ -21,7 +21,7 @@
         plugins = [ "git" ];
         theme = "robbyrussell";
       };
-      initExtra = ''
+      initContent = ''
         # Disable ctrl+h keybinding
         bindkey -r "^H"
       '';
