@@ -71,6 +71,16 @@
   ];
   services.tailscale.enable = true;
 
+  system.activationScripts.timeMachineExclusions.text = ''
+    echo "Setting Time Machine exclusions..."
+    /usr/bin/tmutil addexclusion \
+      /Users/marc/.nuget/packages \
+      /Users/marc/Library/Caches \
+      /Users/marc/.cache \
+      /Users/marc/.colima/_lima/_disks
+    /usr/bin/tmutil addexclusion -v /nix
+  '';
+
   # Auto-upgrade: runs as root, handles flake update + darwin-rebuild
   launchd.daemons.nix-auto-upgrade = {
     serviceConfig = {
