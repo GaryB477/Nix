@@ -32,10 +32,7 @@ in
             signColumn = true;
           };
         };
-        vscode = {
-          enable = true;
-          profileNames = [ "default" ];
-        };
+        vscode.enable = false;
       };
     }
     # ./emacs/emacs.nix

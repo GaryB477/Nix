@@ -1,351 +1,52 @@
-{ pkgs, config, ... }:
+{ pkgs, lib, ... }:
 {
   programs.vscode = {
     enable = true;
     package = pkgs.vscode;
-    mutableExtensionsDir = false;
-    profiles = {
-      default = {
-        enableUpdateCheck = false;
-        enableExtensionUpdateCheck = false;
+    mutableExtensionsDir = true;
+    extensions = with pkgs.vscode-marketplace; [
+      # vim
+      vscodevim.vim
 
-        # I try to make the key bindings as similar as possible to my nvim setup
-        keybindings = [
-          {
-            "key" = "ctrl+h";
-            "command" = "workbench.action.navigateLeft";
-          }
-          {
-            "key" = "ctrl+l";
-            "command" = "workbench.action.navigateRight";
-          }
-          {
-            "key" = "ctrl+k";
-            "command" = "workbench.action.navigateUp";
-          }
-          {
-            "key" = "ctrl+j";
-            "command" = "workbench.action.navigateDown";
-          }
-          {
-            "key" = "enter";
-            "command" = "-renameFile";
-            "when" =
-              "filesExplorerFocus && foldersViewVisible && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus";
-          }
-          {
-            "key" = "enter";
-            "command" = "filesExplorer.openFilePreserveFocus";
-            "when" = "filesExplorerFocus && foldersViewVisible && !explorerResourceIsFolder && !inputFocus";
-          }
-          {
-            "key" = "a";
-            "command" = "explorer.newFile";
-            "when" = "filesExplorerFocus && foldersViewVisible && explorerResourceIsFolder && !inputFocus";
-          }
-          {
-            "key" = "ctrl+enter";
-            "command" = "code-runner.run";
-          }
-          {
-            "key" = "ctrl+p";
-            "command" = "selectPrevSuggestion";
-          }
-          {   
-            "key" = "ctrl+n"; 
-            "command" = "selectNextSuggestion";
-            "when" = "suggestWidgetVisible";
-          }
-          {   
-            "key" = "escape"; 
-            "command" = "hideSuggestWidget";
-            "when" = "suggestWidgetVisible";
-          }
-          {
-            "key" = "shift shift";
-            "command" = "workbench.action.quickOpen";
-          }
-          {
-            "key" = "f2";
-            "command" = "editor.action.revealDefinition";
-          }
-          {
-            "key" = "ctrl+shift+alt+l";
-            "command" = "editor.action.formatDocument";
-          }
-        ];
-        userSettings = {
+      # nix
+      jnoortheen.nix-ide
 
-          # theming
-          "editor.semanticHighlighting.enabled" = true;
-          "terminal.integrated.minimumContrastRatio" = 1;
-          "window.titleBarStyle" = "custom";
-          # font and theme is set by stylix
+      # git
+      eamodio.gitlens
+      waderyan.gitblame
 
-          # editor basics
-          "editor.tabSize" = 2;
-          "editor.lineNumbers" = "relative";
-          "files.autoSave" = "afterDelay";
-          "files.insertFinalNewline" = true;
-          "editor.fontLigatures" = true;
-          "editor.minimap.enabled" = false;
-          "workbench.editor.showTabs" = "multiple"; # no tabs (like my emacs and vim)
-          "window.zoomLevel" = 1;
+      # shell
+      timonwong.shellcheck
+      marcovr.actions-shell-scripts
 
-          # disable updates & synching
-          "extensions.autoUpdate" = false;
-          "extensions.autoCheckUpdates" = false;
-          "update.mode" = "none";
-          "settingsSync.keybindingsPerPlatform" = false;
-          "extensions.ignoreRecommendations" = true;
+      # python
+      ms-python.python
+      ms-python.vscode-pylance
+      ms-python.debugpy
+      charliermarsh.ruff
 
-          # svelte extension config
-          "svelte.enable-ts-plugin" = true;
+      # terraform
+      hashicorp.terraform
 
-          # JS/TS setup
-          "eslint.workingDirectories" = [ { "mode" = "auto"; } ];
-          # "eslint.format.enable" = true;
-          # "[typescriptreact]" = {
-          #   "editor.defaultFormatter" = "dbaeumer.vscode-eslint";
-          # };
-          # "[typescript]" = {
-          #   "editor.defaultFormatter" = "dbaeumer.vscode-eslint";
-          # };
+      # helm
+      tim-koehler.helm-intellisense
 
-          # vim plugin setup
-          "vim.easymotion" = true;
-          "vim.incsearch" = true;
-          "vim.useSystemClipboard" = true;
-          "vim.useCtrlKeys" = true;
-          "vim.hlsearch" = true;
-          "vim.insertModeKeyBindings" = [
-            {
-              "before" = [
-                "j"
-                "j"
-              ];
-              "after" = [ "<Esc>" ];
-            }
-          ];
-          "vim.visualModeKeyBindings" = [
-            {
-                "before" = [
-                    "<Leader>"
-                    "c"
-                ];
-                "commands" = [
-                    "editor.action.commentLine"
-                ];
-            }
-          ];
+      # misc
+      pkief.material-icon-theme
+      streetsidesoftware.code-spell-checker
+      github.vscode-github-actions
 
-          "vim.normalModeKeyBindingsNonRecursive" = [
-            {
-              "before" = [
-                  "<Leader>"
-                  "c"
-              ];
-              "commands" = [
-                  "editor.action.commentLine"
-              ];
-            }
-            {
-              "before" = [
-                  "<Leader>"
-                  "r"
-              ];
-              "commands" = [
-                  "editor.action.rename"
-              ];
-            }
-            {
-              "before" = [
-                  "<Leader>"
-                  "j"
-              ];
-              "commands" = [
-                  "workbench.action.navigateBack"
-              ];
-            }
-            {
-              "before" = [
-                  "<Leader>"
-                  "k"
-              ];
-              "commands" = [
-                  "workbench.action.navigateForward"
-              ];
-            }
-            {
-              "before" = [
-                  "<Leader>"
-                  "l"
-              ];
-              "commands" = [
-                  "workbench.action.navigateEditorGroups"
-              ];
-            }
-            {
-              "before" = [
-                  "<Leader>"
-                  "f"
-              ];
-              "commands" = [
-                  "editor.foldRecursively"
-              ];
-            }
-            {
-              "before" = [
-                  "<Leader>"
-                  "f"
-                  "f"
-              ];
-              "commands" = [
-                  "editor.foldAll"
-              ];
-            }
-            {
-              "before" = [
-                  "<Leader>"
-                  "o"
-              ];
-              "commands" = [
-                  "editor.unfoldRecursively"
-              ];
-            }
-            {
-              "before" = [
-                  "<C-u>"
-              ];
-              "after" = [
-                  "1"
-                  "0"
-                  "k"
-              ];
-            }
-            {
-              "before" = [
-                  "<C-d>"
-              ];
-              "after" = [
-                  "1"
-                  "0"
-                  "j"
-              ];
-            }
-            {
-              "before" = [
-                  "<Leader>"
-                  "w"
-              ];
-              "commands" = [
-                  "editor.action.marker.next"
-              ];
-            }
-          ];
-          "vim.leader" = "<space>";
-          "vim.handleKeys" = {
-            "<C-a>" = false;
-            "<C-f>" = false;
-          };
-          "[csharp]" = {
-            "editor.defaultFormatter" = "csharpier.csharpier-vscode";
-          };
-          "[jsonc]" = {
-            "editor.defaultFormatter" = "vscode.json-language-features";
-          };
-          "[html]" = {
-            "editor.defaultFormatter" = "vscode.html-language-features";
-          };
-          "[json]" = {
-            "editor.defaultFormatter" = "vscode.json-language-features";
-          };
-          "[javascript]" = {
-            "editor.defaultFormatter" = "esbenp.prettier-vscode";
-          };
-          "ilspy.defaultOutputLanguage" = "C# 11.0 / VS 2022.4";
-          "files.eol" = "\n";
-          "editor.formatOnSave" = false;
-          "python.analysis.typeCheckingMode" = "standard";
-          "editor.fontSize" = pkgs.lib.mkForce 12.0;
-          "chat.editor.fontSize" = pkgs.lib.mkForce 12.0;
-          "debug.console.fontSize" = pkgs.lib.mkForce 12.0;
-          "markdown.preview.fontSize" = pkgs.lib.mkForce 12.0;
-          "terminal.integrated.fontSize" = pkgs.lib.mkForce 12.0;
-          "workbench.sideBar.location" = "right";
-
-          "github.copilot.enable" = {
-            "*" = true; # disable suggestions
-            "inlineSuggestions" = true; # disable inline-suggestions
-          };
-          "chat.agent.enabled" = true;
-        };
-
-        extensions =
-          # From vscode overlay
-          with pkgs.vscode-marketplace;
-          [
-            # General repo setups
-            editorconfig.editorconfig # needed?
-            streetsidesoftware.code-spell-checker
-            marcovr.actions-shell-scripts
-
-            # Make VSCode more like vim and emacs
-            vscodevim.vim
-
-            # AI save the day!
-            anthropic.claude-code
-
-            # Python
-            ms-python.python
-            ms-python.debugpy
-
-            # Lua
-            sumneko.lua
-
-            # Nix
-            jnoortheen.nix-ide
-
-            # Docker / DevOps / Cloud
-            github.vscode-github-actions
-            ashishalex.dataform-lsp-vscode
-
-            # XML, YAML, TOML, CSV
-            redhat.vscode-yaml
-            tamasfe.even-better-toml
-            redhat.vscode-xml
-            bluebrown.yamlfmt
-            janisdd.vscode-edit-csv
-
-            # Shell
-            timonwong.shellcheck
-          ]
-          ++ (with pkgs.vscode-extensions; [
-            github.vscode-pull-request-github
-
-            github.copilot
-            # github.copilot-chat
-          ])
-          ++ [
-          # Manually pin Copilot Chat to a specific version
-          (pkgs.vscode-utils.extensionFromVscodeMarketplace {
-            name = "copilot-chat";
-            publisher = "GitHub";
-            # Example version: September 2024. 
-            # Check the VS Code Marketplace "Version History" tab for other valid strings.
-            version = "0.33.2"; 
-            
-            # STEP 1: Use fakeSha256 first
-            
-            sha256 = "sha256-8TgwChU+849zSd+/j3pVR/0U96QJV3jLbyf8XhTVnys="; 
-            # sha256 = pkgs.lib.fakeSha256; 
-            
-            # STEP 2: After the build fails, copy the generic hash from the error 
-            # and paste it here, replacing the fake one.
-            # sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; 
-          })
-        ];
-      };
-    };
+      # ai
+      anthropic.claude-code
+    ];
   };
+
+  # Bridge: macOS VSCode reads from Library/..., stow manages ~/.config/Code/
+  # Chain: Library/.../settings.json -> ~/.config/Code/User/settings.json -> dotfiles (stow)
+  home.activation.vscodeStowBridge = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    target="$HOME/Library/Application Support/Code/User"
+    mkdir -p "$target"
+    ln -sf "$HOME/.config/Code/User/settings.json" "$target/settings.json"
+    ln -sf "$HOME/.config/Code/User/keybindings.json" "$target/keybindings.json"
+  '';
 }
