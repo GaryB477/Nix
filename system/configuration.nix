@@ -156,6 +156,7 @@
       "docker"
       "plex"
       "krisp"
+      "freelens"
       "gitkraken"
       "ghostty"
       "hammerspoon"

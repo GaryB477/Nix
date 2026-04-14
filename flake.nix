@@ -11,8 +11,6 @@
     # nixpkgs channels
     nixpkgs.url = "https://github.com/nixos/nixpkgs/archive/nixpkgs-25.11-darwin.tar.gz";
     nixpkgs-unstable.url = "https://github.com/nixos/nixpkgs/archive/nixpkgs-unstable.tar.gz";
-    nixpkgs-nixos.url = "https://github.com/nixos/nixpkgs/archive/nixos-unstable.tar.gz";
-    nixpkgs-nixos-stable.url = "https://github.com/nixos/nixpkgs/archive/nixos-25.11.tar.gz";
 
     # home manager
     home-manager = {
@@ -57,7 +55,6 @@
       self,
       darwin,
       nixpkgs,
-      nixpkgs-nixos,
       nixpkgs-unstable,
       home-manager,
       devenv,
@@ -92,7 +89,7 @@
       pkgsBySystem = builtins.listToAttrs (
         builtins.map (system: {
           name = system;
-          value = import (if (isDarwin system) then nixpkgs else nixpkgs-nixos) {
+          value = import nixpkgs {
             inherit system;
             overlays = [
               (final: prev: {

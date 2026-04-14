@@ -65,6 +65,8 @@ in
       allowUnsupportedSystem = true;
       permittedInsecurePackages = [
         "python3.12-ecdsa-0.19.1"
+        "lima-full-1.2.2"
+        "lima-additional-guestagents-1.2.2"
       ];
     };
   };
@@ -229,6 +231,7 @@ in
         k9s
         docker
         colima
+        rancher
         podman
         kubelogin
         kubernetes-helm
@@ -264,6 +267,7 @@ in
         httpie
         killall
         libnotify
+        nixos-rebuild
         ncdu
         openssl
         postman
@@ -275,6 +279,7 @@ in
         trivy
         tree
         stow
+        sketchybar
         wireshark
         # tldr # simpler manpages
         # vifm
