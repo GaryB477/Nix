@@ -15,6 +15,8 @@
         gc = "git clone ";
         prc = "gh pr create -d --fill && gh pr view --web";
         prv = "gh pr view --web";
+        k = "kubectl";
+        tf = "terraform";
       };
       oh-my-zsh = { # "ohMyZsh" without Home Manager
         enable = true;
