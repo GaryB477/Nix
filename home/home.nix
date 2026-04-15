@@ -322,5 +322,6 @@ in
 
   home.sessionVariables = {
     DOTNET_ROOT = "${dotnet-packages}/share/dotnet";
+    DOTNET_SYSTEM_GLOBALIZATION_INVARIANT = "1";
   };
 }

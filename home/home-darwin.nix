@@ -13,6 +13,14 @@
     pinentry_mac # gpg
   ];
 
+  launchd.agents.set-dotnet-env = {
+    enable = true;
+    config = {
+      ProgramArguments = [ "sh" "-c" "launchctl setenv DOTNET_SYSTEM_GLOBALIZATION_INVARIANT 1" ];
+      RunAtLoad = true;
+    };
+  };
+
   home.activation = {
     rsync-home-manager-applications = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       rsyncArgs="--archive --checksum --copy-unsafe-links --delete"
