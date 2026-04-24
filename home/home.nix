@@ -323,5 +323,8 @@ in
   home.sessionVariables = {
     DOTNET_ROOT = "${dotnet-packages}/share/dotnet";
     DOTNET_SYSTEM_GLOBALIZATION_INVARIANT = "1";
+    # Point docker CLI + python docker lib at colima socket
+    DOCKER_HOST = "unix:///Users/marc/.colima/default/docker.sock";
+    GH_TELEMETRY = "false";
   };
 }

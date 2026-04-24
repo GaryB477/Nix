@@ -180,6 +180,7 @@
       "microsoft-teams"
       "pritunl"
       "easy-move+resize" # Click and drag windows
+      "lm-studio"
     ];
   };
 }
