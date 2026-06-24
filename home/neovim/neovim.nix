@@ -6,6 +6,8 @@
     viAlias = true;
     vimAlias = true;
     defaultEditor = true;
+    withRuby = true;
+    withPython3 = true;
 
     plugins =
       let
@@ -331,6 +333,6 @@
 
     extraPackages = [ ];
 
-    extraLuaConfig = builtins.readFile ./init.lua;
+    initLua = builtins.readFile ./init.lua;
   };
 }

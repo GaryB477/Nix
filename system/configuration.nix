@@ -69,7 +69,7 @@
   # NOTE: managed by stylix
   fonts.packages = with pkgs; [
     ubuntu-classic
-    etBook
+    et-book
     nerd-fonts.droid-sans-mono
     nerd-fonts.jetbrains-mono
     nerd-fonts.fira-code
@@ -80,12 +80,12 @@
 
   system.activationScripts.timeMachineExclusions.text = ''
     echo "Setting Time Machine exclusions..."
-    /usr/bin/tmutil addexclusion \
+    /usr/bin/tmutil addexclusion -p \
       /Users/marc/.nuget/packages \
       /Users/marc/Library/Caches \
       /Users/marc/.cache \
-      /Users/marc/.colima/_lima/_disks
-    /usr/bin/tmutil addexclusion -v /nix
+      /Users/marc/.colima/_lima/_disks \
+      /nix
   '';
 
   # Auto-upgrade: runs as root, handles flake update + darwin-rebuild
@@ -164,6 +164,9 @@
     taps = builtins.attrNames config.nix-homebrew.taps;
     brews = [
       "openapi-generator"
+      "the-17/tap/agentsecrets"
+      "colima"
+      "lima"
     ];
     casks = [
       "1password"
@@ -181,6 +184,7 @@
       "pritunl"
       "easy-move+resize" # Click and drag windows
       "lm-studio"
+      "scroll-reverser" # nix zip pkg has broken codesign seal, cask uses signed dmg
     ];
   };
 }

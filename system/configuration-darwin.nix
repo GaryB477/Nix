@@ -61,6 +61,16 @@
           # When performing a search, search the current folder by default
           FXDefaultSearchScope = "SCcf";
         };
+        "com.apple.TimeMachine" = {
+          AutoBackup = true;
+          RequiresACPower = true;
+        };
+        # Free cmd+h in VSCode by remapping the Hide menu item to an unused combo.
+        "com.microsoft.VSCode" = {
+          NSUserKeyEquivalents = {
+            "Hide Visual Studio Code" = "@~^$h"; # cmd+opt+ctrl+shift+h
+          };
+        };
       };
     };
     # activationScripts.postUserActivation.text = ''
@@ -77,6 +87,15 @@
     name = "marc";
     home = "/Users/marc";
   };
+
+  # Time Machine backup destination (NAS via SMB).
+  # Credentials must already exist in the user's Keychain (one-time manual step:
+  # Finder -> Cmd+K -> smb://marc@nixos_nas.local/timemachine -> save to Keychain).
+  system.activationScripts.timeMachineDestination.text = ''
+    echo "Registering Time Machine destination..."
+    /usr/bin/tmutil setdestination -a "smb://marc@nixos_nas.local/timemachine" || \
+      echo "tmutil setdestination failed (Keychain creds missing or NAS unreachable)"
+  '';
 
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true;

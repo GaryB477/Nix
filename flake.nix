@@ -9,17 +9,17 @@
     devenv.inputs.nixpkgs.follows = "nixpkgs";
 
     # nixpkgs channels
-    nixpkgs.url = "https://github.com/nixos/nixpkgs/archive/nixpkgs-25.11-darwin.tar.gz";
+    nixpkgs.url = "https://github.com/nixos/nixpkgs/archive/nixpkgs-26.05-darwin.tar.gz";
     nixpkgs-unstable.url = "https://github.com/nixos/nixpkgs/archive/nixpkgs-unstable.tar.gz";
 
     # home manager
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # nix darwin
-    darwin.url = "github:lnl7/nix-darwin/nix-darwin-25.11";
+    darwin.url = "github:lnl7/nix-darwin/nix-darwin-26.05";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
     # overlays
@@ -38,9 +38,13 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
+    homebrew-the-17-tap = {
+      url = "github:The-17/homebrew-tap";
+      flake = false;
+    };
 
     # theming
-    stylix.url = "github:danth/stylix/release-25.11";
+    stylix.url = "github:danth/stylix/release-26.05";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
     kauz = {
       url = "github:buntec/kauz";
@@ -174,6 +178,7 @@
                       taps = {
                         "homebrew/homebrew-core" = inputs.homebrew-core;
                         "homebrew/homebrew-cask" = inputs.homebrew-cask;
+                        "the-17/tap" = inputs.homebrew-the-17-tap;
                       };
                       autoMigrate = true; # Automatically migrate existing Homebrew installations
                     };
@@ -227,7 +232,7 @@
                 pkgs = pkgsBySystem.${system};
                 rebuildScriptLight = pkgs.writeShellScript "rebuild-${machine.name}-light" (
                   if (isDarwin machine.system) then
-                    "${
+                    "sudo ${
                       self.darwinConfigurations.${"${machine.name}-dark"}.system
                     }/sw/bin/darwin-rebuild switch --flake ${self}#${machine.name}-light"
                   else
@@ -235,7 +240,7 @@
                 );
                 rebuildScriptDark = pkgs.writeShellScript "rebuild-${machine.name}-dark" (
                   if (isDarwin machine.system) then
-                    "${
+                    "sudo ${
                       self.darwinConfigurations.${"${machine.name}-dark"}.system
                     }/sw/bin/darwin-rebuild switch --flake ${self}#${machine.name}-dark"
                   else

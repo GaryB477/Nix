@@ -66,6 +66,7 @@ in
         "python3.12-ecdsa-0.19.1"
         "lima-full-1.2.2"
         "lima-additional-guestagents-1.2.2"
+        "docker-28.5.2"
       ];
     };
   };
@@ -146,7 +147,7 @@ in
       nix-tools = with pkgs; [
         any-nix-shell
         nil # LSP
-        nixfmt-rfc-style # formatter
+        nixfmt # formatter
         statix # linter
       ];
       haskell-language-support = with pkgs; [
@@ -168,8 +169,8 @@ in
         libcxx # needed for bazel?
       ];
       web-dev-support = with pkgs; [
-        nodePackages.prettier # formatter
-        nodePackages.typescript-language-server # LSP for JS/TS
+        prettier # formatter
+        typescript-language-server # LSP for JS/TS
         nodejs # JS/TS
         prettierd # formatter
         stylelint # CSS linter
@@ -194,10 +195,12 @@ in
         vale # markdown linter
         vscode-langservers-extracted # LSPs for various config formats
         yamlfmt # YAML formatter
+        yq-go # Mikefarah Go yq (ea/ireduce syntax, required by vuln scan scripts)
       ];
       gui-apps = with pkgs; [
         # ghostty # currently broken in nixpkgs
         pkgs.unstable.google-chrome
+        zed-editor
       ];
       git-tools = with pkgs; [
         gh # github CLI
@@ -228,11 +231,12 @@ in
         ))
         k9s
         docker
-        colima
         rancher
         podman
         kubelogin
         kubernetes-helm
+        kubectx
+        minikube
         lazydocker
         terraform
         hclfmt # formatter for HCL files (e.g., .tf)
@@ -256,6 +260,7 @@ in
         bat # better cat - https://github.com/sharkdp/bat
         btop
         pkgs.unstable.claude-code
+        pkgs.unstable.opencode
         discord
         direnv
         eza # better ls (bound to `l` and `la` in fish)
@@ -281,7 +286,7 @@ in
         # vifm
         # yazi # file manager
         # yubioath-flutter
-        inputs.dg-cli.packages.${system}.default
+        inputs.dg-cli.packages.${pkgs.stdenv.hostPlatform.system}.default
         yabai
       ];
       custom-packages = with pkgs; [

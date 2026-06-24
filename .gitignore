@@ -6,3 +6,9 @@ result/
 # direnv / devenv
 .direnv
 .devenv
+
+# AgentSecrets environment files
+.env
+.env.development
+.env.staging
+.env.production
