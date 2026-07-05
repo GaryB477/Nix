@@ -286,7 +286,7 @@ in
         # vifm
         # yazi # file manager
         # yubioath-flutter
-        inputs.dg-cli.packages.${pkgs.stdenv.hostPlatform.system}.default
+        # inputs.dg-cli.packages.${pkgs.stdenv.hostPlatform.system}.default
         yabai
       ];
       custom-packages = with pkgs; [
