@@ -15,6 +15,7 @@ nix-darwin-switch mode='dark':
 
 [macos]
 nix-rebuild:
+    sudo touch /nix/.metadata_never_index
     sudo nix run --extra-experimental-features "nix-command flakes" .#rebuild-$(hostname)-dark --show-trace
     mkdir -p $HOME/.cache/home-manager-build
     TMPDIR=$HOME/.cache/home-manager-build home-manager switch --flake .#DG-BYOH-9364-dark
