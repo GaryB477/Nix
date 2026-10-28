@@ -72,6 +72,7 @@ in
   };
 
   home.stateVersion = "22.11";
+  wayland.windowManager.hyprland.configType = "hyprlang";
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -236,11 +237,16 @@ in
         kubelogin
         kubernetes-helm
         kubectx
+        runpodctl
         minikube
         lazydocker
         terraform
         hclfmt # formatter for HCL files (e.g., .tf)
         ansible
+        wireguard-go
+        wireguard-ui
+        wireguard-tools
+        wireguard-vanity-keygen
       ];
       database-tools = with pkgs; [
         duckdb
@@ -286,11 +292,11 @@ in
         # vifm
         # yazi # file manager
         # yubioath-flutter
-        # inputs.dg-cli.packages.${pkgs.stdenv.hostPlatform.system}.default
+        inputs.dg-cli.packages.${pkgs.stdenv.hostPlatform.system}.default
         yabai
       ];
       custom-packages = with pkgs; [
-          (pkgs.callPackage ../packages/esphome/package.nix { })
+          # (pkgs.callPackage ../packages/esphome/package.nix { })
         ];
     in
     pkgs.lib.lists.flatten [
@@ -327,7 +333,6 @@ in
 
   home.sessionVariables = {
     DOTNET_ROOT = "${dotnet-packages}/share/dotnet";
-    DOTNET_SYSTEM_GLOBALIZATION_INVARIANT = "1";
     # Point docker CLI + python docker lib at colima socket
     DOCKER_HOST = "unix:///Users/marc/.colima/default/docker.sock";
     GH_TELEMETRY = "false";

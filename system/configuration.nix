@@ -99,7 +99,7 @@
           pmset -g ps | grep -q 'AC Power' || exit 0
           cd /Users/marc/git/private/Nix
           touch /tmp/nix-upgrade-running
-          /run/current-system/sw/bin/nix flake update && /run/current-system/sw/bin/darwin-rebuild switch --flake .#DG-BYOH-9364-dark
+          /usr/bin/sudo -u marc /run/current-system/sw/bin/nix flake update --flake path:/Users/marc/git/private/Nix && /run/current-system/sw/bin/darwin-rebuild switch --flake path:/Users/marc/git/private/Nix#DG-BYOH-9364-dark
           echo $? > /tmp/nix-upgrade-exit-code
           rm -f /tmp/nix-upgrade-running
           touch /tmp/nix-upgrade-done
@@ -171,13 +171,13 @@
     casks = [
       "1password"
       "balenaetcher"
+      "docker/tap/sbx"
       "eurkey" # keyboard layout
       "docker"
       "plex"
       "krisp"
       "freelens"
       "gitkraken"
-      "ghostty"
       "hammerspoon"
       "obsidian"
       "microsoft-teams"

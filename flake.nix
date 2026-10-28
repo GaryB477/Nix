@@ -29,7 +29,14 @@
     nix-vscode-extensions.inputs.nixpkgs.follows = "nixpkgs";
 
     # nix-homebrew
-    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+    brew-src = {
+      url = "github:Homebrew/brew/6.0.16";
+      flake = false;
+    };
+    nix-homebrew = {
+      url = "github:zhaofengli-wip/nix-homebrew";
+      inputs.brew-src.follows = "brew-src";
+    };
     homebrew-core = {
       url = "github:homebrew/homebrew-core";
       flake = false;
@@ -42,6 +49,10 @@
       url = "github:The-17/homebrew-tap";
       flake = false;
     };
+    homebrew-docker-tap = {
+      url = "github:docker/homebrew-tap";
+      flake = false;
+    };
 
     # theming
     stylix.url = "github:danth/stylix/release-26.05";
@@ -52,7 +63,7 @@
     };
 
    #dg-cli.url = "git+ssh://git@github.com/DigitecGalaxus/Dg.Cli?ref=refs/tags/2.16.0";
-   # dg-cli.url = "git+ssh://git@github.com/DigitecGalaxus/Dg.Cli?ref=main";
+   dg-cli.url = "git+ssh://git@github.com/DigitecGalaxus/Dg.Cli?ref=main";
   };
 
   outputs =
@@ -152,7 +163,7 @@
         let
           pkgs = pkgsBySystem.${system};
         in
-        treefmtEval.${pkgs.system}.config.build.wrapper
+        treefmtEval.${pkgs.stdenv.hostPlatform.system}.config.build.wrapper
       );
 
       darwinConfigurations = builtins.listToAttrs (
@@ -179,7 +190,9 @@
                         "homebrew/homebrew-core" = inputs.homebrew-core;
                         "homebrew/homebrew-cask" = inputs.homebrew-cask;
                         "the-17/tap" = inputs.homebrew-the-17-tap;
+                        "docker/tap" = inputs.homebrew-docker-tap;
                       };
+                      trust.taps = [ "docker/tap" ];
                       autoMigrate = true; # Automatically migrate existing Homebrew installations
                     };
                   }

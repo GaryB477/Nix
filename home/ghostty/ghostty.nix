@@ -14,7 +14,7 @@
         "cmd+e=equalize_splits"
       ];
     };
-    package = if pkgs.stdenv.hostPlatform.isDarwin then null else pkgs.ghostty; # currently marked broken on Darwin
+    package = if pkgs.stdenv.hostPlatform.isDarwin then pkgs.ghostty-bin else pkgs.ghostty;
   };
 
 }
